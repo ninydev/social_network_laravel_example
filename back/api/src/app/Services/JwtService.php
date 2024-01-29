@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use OpenApi\Attributes as OAT;
 
+//#[OAT\Schema(
+//    schema: 'SuccessLoginResponse',
+//    properties: [
+//        new OAT\Property(
+//            property: 'status',
+//            type: 'string',
+//            example: 'true'
+//        ),
+//    ]
+//)]
+
 class JwtService
 {
 
