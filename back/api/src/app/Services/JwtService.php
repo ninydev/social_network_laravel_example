@@ -11,7 +11,6 @@ class JwtService
     public function guardApi(array $data)
     {
         $token = Auth::guard('api')->attempt($data);
-        info($token);
         return $token;
     }
 
