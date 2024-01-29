@@ -27,9 +27,26 @@ paths:
       operationId: api.auth.register
       requestBody:
         required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
       responses:
         '200':
           description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessLoginResource'
+        '422':
+          description: 'password confirmation'
+          content:
+            application/json:
+              schema:
+                properties:
+                  status: { type: string, example: error }
+                  message: { type: string, example: 'password confirmation.' }
+                type: object
 components:
   schemas:
     ValidationError:
@@ -50,6 +67,46 @@ components:
                 type: string
                 example: 'Error message 2'
           type: object
+      type: object
+    RegisterRequest:
+      required:
+        - name
+        - email
+        - password
+        - password_confirmation
+      properties:
+        name:
+          type: string
+          example: 'John Doe'
+        email:
+          type: string
+          format: email
+          example: john@example.com
+        password:
+          type: string
+          example: '123456'
+        password_confirmation:
+          type: string
+          example: '123456'
+      type: object
+    SuccessLoginResource:
+      properties:
+        status:
+          type: string
+          example: 'true'
+      type: object
+    User:
+      properties:
+        id:
+          type: integer
+          example: '2'
+        name:
+          type: string
+          example: 'John Doe'
+        email:
+          type: string
+          format: email
+          example: john@example.com
       type: object
   securitySchemes:
     BearerToken:

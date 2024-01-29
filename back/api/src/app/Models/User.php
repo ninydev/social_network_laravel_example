@@ -8,7 +8,29 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use OpenApi\Attributes as OAT;
 
+#[OAT\Schema(
+    schema: 'User',
+    properties: [
+        new OAT\Property(
+            property: 'id',
+            type: 'int',
+            example: '2'
+        ),
+        new OAT\Property(
+            property: 'name',
+            type: 'string',
+            example: 'John Doe'
+        ),
+        new OAT\Property(
+            property: 'email',
+            type: 'string',
+            format: 'email',
+            example: 'john@example.com'
+        ),
+    ]
+)]
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
