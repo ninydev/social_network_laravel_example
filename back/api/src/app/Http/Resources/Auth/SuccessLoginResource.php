@@ -15,6 +15,16 @@ use OpenApi\Attributes as OAT;
             type: 'string',
             example: 'true'
         ),
+        new OAT\Property(
+            property: 'user',
+            type: 'object',
+            ref: '#/components/schemas/User'
+        ),
+        new OAT\Property(
+            property: 'authorisation',
+            type: 'object',
+            ref: '#/components/schemas/TokenResource'
+        ),
     ]
 )]
 class SuccessLoginResource extends JsonResource

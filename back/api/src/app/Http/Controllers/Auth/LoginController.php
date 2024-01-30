@@ -9,20 +9,7 @@ use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 use OpenApi\Attributes as OAT;
 
-#[OAT\Post(
-    tags: ['auth'],
-    path: '/api/auth/login',
-    summary: 'Login a user',
-    operationId: 'api.auth.login',
-    requestBody: new OAT\RequestBody(
-        required: true,
-    ),
-    responses: [
-        new OAT\Response(
-            response: 200,
-            description: 'Ok',
-        )]
-)]
+
 class LoginController extends Controller
 {
     public function __construct(
@@ -30,7 +17,20 @@ class LoginController extends Controller
     )
     {
     }
-
+    #[OAT\Post(
+        tags: ['auth'],
+        path: '/api/auth/login',
+        summary: 'Login a user',
+        operationId: 'api.auth.login',
+        requestBody: new OAT\RequestBody(
+            required: true,
+        ),
+        responses: [
+            new OAT\Response(
+                response: 200,
+                description: 'Ok',
+            )]
+    )]
     public function __invoke(LoginRequest $request): JsonResponse
     {
         $token = $this->jwtService->guardApi([
