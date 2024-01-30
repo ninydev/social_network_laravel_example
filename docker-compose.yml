@@ -53,6 +53,25 @@ services:
       - db.redis.cache
 
 # -----------------------------------------------------------------
+  laravel.jobs.avatars:
+    build:
+      dockerfile: Dockerfile_avatars
+      context: ./back/api
+    container_name: laravel.jobs.avatars
+    volumes:
+      - ./back/api/src:/var/www/html
+    env_file:
+      - ./.env
+    networks:
+      - sne
+    depends_on:
+      - db.mysql.main
+      - db.redis.cache
+      - db.redis.jobs
+
+
+
+# -----------------------------------------------------------------
 # Параллельная  нагрузка
 #  laravel.api.jonny:
 #    build:
@@ -91,6 +110,7 @@ services:
     networks:
       - sne
 
+  # Этот сервер будет содержать кеш сайта
   db.redis.cache:
     build:
       dockerfile: ./services/redis/Dockerfile
@@ -98,8 +118,17 @@ services:
     container_name: db.redis.cache
     volumes:
       - ./volumes/db/redis/cache:/data
-    ports:
-      - '6379:6379'
+    networks:
+      - sne
+
+  # На этом сервере будет информация для jobs
+  db.redis.jobs:
+    build:
+      dockerfile: ./services/redis/Dockerfile
+      context: .
+    container_name: db.redis.jobs
+    volumes:
+      - ./volumes/db/redis/jobs:/data
     networks:
       - sne
 
