@@ -146,7 +146,7 @@ return [
             'database' => env('REDIS_CACHE_DB', '1'),
         ],
 
-        'jobs' => [
+        'redis.jobs' => [
             'url' => env('REDIS_URL'),
             'host' => env('REDIS_JOBS_HOST', '127.0.0.1'),
             'username' => env('REDIS_JOBS_USERNAME'),
@@ -161,7 +161,7 @@ return [
             'username' => env('REDIS_JOBS_USERNAME'),
             'password' => env('REDIS_JOBS_PASSWORD'),
             'port' => env('REDIS_JOBS_PORT', '6379'),
-            'database' => env('REDIS_JOBS_DB', '1'),
+            'database' => env('1'),
         ],
 
     ],
