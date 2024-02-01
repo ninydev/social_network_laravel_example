@@ -4,6 +4,7 @@ namespace App\Services\Profile;
 
 use App\Repositories\UserRepository;
 use Creativeorange\Gravatar\Facades\Gravatar;
+use Illuminate\Http\UploadedFile;
 
 class AvatarService
 {
@@ -11,6 +12,19 @@ class AvatarService
     public function __construct(private UserRepository $userRepository, private AvatarStorageService $storageService)
     {
     }
+
+    public function uploadAvatar(int $user_id, UploadedFile $file)
+    {
+        $this->storageService->putFromContent($user_id, 'original', $file->getContent());
+    }
+
+    public function optimizeAvatar(int $user_id)
+    {
+        // Прочитать файл и сделать из него аватарки
+        \Laravel\Prompts\info("Optimize");
+
+    }
+
 
     /**
      * Получает случайные аватарки

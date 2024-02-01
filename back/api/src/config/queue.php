@@ -73,7 +73,7 @@ return [
 
         'avatars.jobs' => [
             'driver' => 'redis',
-            'connection' => 'avatars.jobs',
+            'connection' => 'redis',
             'queue' => env('REDIS_AVATARS_QUEUE', 'avatars.jobs'),
             'retry_after' => 90,
             'block_for' => null,

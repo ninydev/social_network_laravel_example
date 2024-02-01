@@ -9,7 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class CreateAvatarJob implements ShouldQueue
+class OptimizeAvatarJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -46,6 +46,6 @@ class CreateAvatarJob implements ShouldQueue
     public function handle(AvatarService $avatarService): void
     {
         \Laravel\Prompts\info("handle job");
-        $avatarService->createAvatar($this->user_id);
+        $avatarService->optimizeAvatar($this->user_id);
     }
 }
