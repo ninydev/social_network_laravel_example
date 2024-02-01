@@ -9,7 +9,8 @@ class AvatarService
 {
 
     public function __construct(
-        private UserRepository $userRepository)
+        private UserRepository $userRepository,
+        private AvatarStorageService $storageService)
     {
     }
 
@@ -21,15 +22,18 @@ class AvatarService
 
         if(Gravatar::exists($email)) {
             $url_original = Gravatar::get($email, 'original');
+            $this->storageService->storeAvatarFromUrl($user_id,  'original', $url_original);
             $url_medium = Gravatar::get($email, 'medium');
+            $this->storageService->storeAvatarFromUrl($user_id,  'medium', $url_medium);
             $url_small = Gravatar::get($email, 'small');
+            $this->storageService->storeAvatarFromUrl($user_id,  'smaill', $url_small);
 
-
-
-//            return [
-//                $url_original, $url_medium, $url_small
-//            ];
+            return [
+                $url_original, $url_medium, $url_small
+            ];
         }
+
+        return [];
     }
 
 }
