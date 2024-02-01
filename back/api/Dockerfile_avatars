@@ -38,3 +38,6 @@ EXPOSE 8000
 
 # Запуск сервисов контейнера
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# Если не использовать супервизор - я могу запустить контейнер
+# вызвав команду таким образом
+# CMD ["/var/www/html/artisan", "queue:work", "--queue=avatars.jobs"]
