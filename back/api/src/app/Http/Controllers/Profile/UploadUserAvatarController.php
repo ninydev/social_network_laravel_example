@@ -21,6 +21,10 @@ class UploadUserAvatarController extends Controller
     {
         $avatarService->uploadAvatar($request->user()->id, $request->file('avatar'));
         OptimizeAvatarJob::dispatch($request->user()->id);
+        // В момент запроса у меня еще нет файла автатарки
+        // Я не знаю, когда он будет готов
+
+        // Как фронт (клиент) узнает, что у него появилась аватарка?
 
         // CreateAvatarJob::dispatch($request->user()->id);
         // return response()->json($this->avatarService->createAvatar($request->user()->id));
