@@ -12,6 +12,13 @@ const SERVER_NAME = process.env.SERVER_NAME || 'Node Socket';
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
 /**
+ * Import modules
+ */
+import { Server } from 'socket.io';
+import { createClient } from 'redis';
+import { createAdapter } from '@socket.io/redis-adapter';
+
+/**
  * Create redis
  */
 const pubClient =  createClient({
