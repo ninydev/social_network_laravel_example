@@ -3,6 +3,7 @@
 namespace App\Jobs\Profile;
 
 use App\Services\Profile\AvatarService;
+use App\Services\Socket\SocketService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -43,9 +44,12 @@ class OptimizeAvatarJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(AvatarService $avatarService): void
+    public function handle(
+        SocketService $socketService,
+        AvatarService $avatarService): void
     {
-        \Laravel\Prompts\info("handle job");
+        \Laravel\Prompts\info("OptimizeAvatarJob job");
         $avatarService->optimizeAvatar($this->user_id);
+        $socketService->emit('socket.php', "From Jobs " . date('Y-m-d H:i:s'));
     }
 }

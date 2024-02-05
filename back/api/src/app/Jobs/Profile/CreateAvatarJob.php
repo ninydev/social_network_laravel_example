@@ -45,7 +45,7 @@ class CreateAvatarJob implements ShouldQueue
      */
     public function handle(AvatarService $avatarService): void
     {
-        \Laravel\Prompts\info("handle job");
+        \Laravel\Prompts\info("CreateAvatarJob job");
         $avatarService->createAvatar($this->user_id);
     }
 }

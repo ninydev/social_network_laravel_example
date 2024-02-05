@@ -37,6 +37,10 @@ function App() {
     toast.dark("Ping: " + Date(data));
   })
 
+  socket.on ('socket.php', (data) => {
+    toast.warning("From Laravel: " + data);
+  })
+
   console.log('App Starting')
 
   return (
