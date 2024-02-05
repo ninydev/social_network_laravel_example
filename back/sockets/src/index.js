@@ -52,4 +52,10 @@ Promise.all([pubClient.connect(), subClient.connect()]).then(() => {
     })
 
     io.listen(SERVER_PORT);
+
+// Пинг сервера - для всех (пустое бессмысленное сообщение)
+    setInterval(() =>{
+        io.emit('socket.ping', Date.now())
+    }, 10000)
+
 });
